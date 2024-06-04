@@ -1,31 +1,39 @@
-# Stage 1: Build frontend
-FROM node:latest as frontend
+# Use the official Node.js image.
+FROM node:20.14.0
 
-WORKDIR /app/frontend
+# Set the working directory for the frontend
+FROM node:20.14.0 AS front
 
-COPY frontend/package*.json ./
-RUN npm install
-COPY frontend .
+WORKDIR /app/front
+
+COPY front/package*.json ./
+RUN rm -rf package-lock.json node_modules && npm install && npm i vite@5.2.12
+COPY front ./
 
 RUN npm run build
 
-# Stage 2: Build backend
-FROM node:latest as backend
+# Build the frontend
+RUN npm run build
 
+# Set the working directory for the backend
 WORKDIR /app/backend
 
+# Copy and install backend dependencies
 COPY backend/package*.json ./
-RUN npm install
-COPY backend .
+RUN rm -rf node_modules && npm install
 
-# Final stage: Combine frontend and backend
-FROM node:latest
+# Copy the backend code
+COPY backend ./
 
+# Set the working directory for the final setup
 WORKDIR /app
 
-COPY --from=frontend /app/frontend/dist ./frontend/dist
-COPY --from=backend /app/backend ./
+# Copy the start script
+COPY bin/start.sh /app/bin/start.sh
 
-EXPOSE 3000  # Expose backend port
+# Expose the ports for the frontend and backend
+EXPOSE 3000
+EXPOSE 5173
 
-CMD ["npm", "start"]
+# Start both frontend and backend
+CMD ["/app/bin/start.sh"]

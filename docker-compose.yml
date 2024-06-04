@@ -1,9 +1,11 @@
-version: '3'
+version: '3.8'
+
 services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - "9000:9000"  # Backend port
+      - "5173:5173"  # Frontend port
     volumes:
       - .:/app
-    command: ["./bin/start.sh"]
+    command: ["/app/bin/start.sh"]
