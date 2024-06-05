@@ -7,7 +7,7 @@ FROM node:20.14.0 AS front
 WORKDIR /app/front
 
 COPY front/package*.json ./
-RUN rm -rf package-lock.json node_modules && npm install && npm i vite@5.2.12
+RUN rm -rf package-lock.json node_modules && npm install
 COPY front ./
 
 # Build the frontend
