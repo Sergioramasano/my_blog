@@ -10,8 +10,6 @@ COPY front/package*.json ./
 RUN rm -rf package-lock.json node_modules && npm install && npm i vite@5.2.12
 COPY front ./
 
-RUN npm run build
-
 # Build the frontend
 RUN npm run build
 
