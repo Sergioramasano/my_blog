@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  node-app:
+    build:
+      context: ./front   # Specify the directory containing the Dockerfile
+      dockerfile: Dockerfile  # Specify the Dockerfile name if it's not named 'Dockerfile'
+    container_name: my_blog
+    volumes:
+      - ./:/var/www/
+    working_dir: /var/www/
+    entrypoint: 'sh -c "npm install && npx vite --host 0.0.0.0"'
+    expose:
+      - "5173"
+    ports:
+      - "5173:5173"

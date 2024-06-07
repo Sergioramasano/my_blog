@@ -3,10 +3,13 @@
 There is a full-stack web application that allows users to create, read, update, and delete (CRUD) posts. The backend is built with Node.js and Express, while the frontend is powered by Vite and Vue 3.
 
 
-**Building the Docker Image**
+To build and run the services, use the following commands:
 
-`docker-compose up --build`
+Build and start the Back-end Service:
+`docker-compose -f docker-compose.yml up --build -d`
 
-**Running the Docker Container**
+Build and start the Front-end Service:
+`docker-compose -f docker-compose.front.yml up --build -d`
 
-`docker run -p 9000:9000 my_app_image`
+Start FE + BE
+`cd bin && chmod +x start_services.sh && bash start_services.sh`

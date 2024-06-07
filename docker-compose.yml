@@ -1,11 +1,13 @@
 version: '3.8'
 
 services:
-  app:
-    build: .
+  backend:
+    build:
+      context: ./backend   # Specify the directory containing the Dockerfile
+      dockerfile: Dockerfile  # Optional: Specify the Dockerfile name if it's not named 'Dockerfile'
+    container_name: my_backend
     ports:
       - "9000:9000"  # Backend port
-      - "5173:5173"  # Frontend port
     volumes:
       - .:/app
     command: ["/app/bin/start.sh"]
