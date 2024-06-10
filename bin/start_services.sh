@@ -28,4 +28,4 @@ fi
 # Display URLs for accessing the services
 echo "Both services are up and running."
 echo "Backend service is accessible at: http://localhost:9000"
-echo "Frontend service is accessible at: http://localhost:5173"
+echo "Frontend service is accessible at: http://localhost:5172"

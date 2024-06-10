@@ -3,14 +3,14 @@ version: '3'
 services:
   node-app:
     build:
-      context: ./front   # Specify the directory containing the Dockerfile
-      dockerfile: Dockerfile  # Specify the Dockerfile name if it's not named 'Dockerfile'
+      context: ./front   # Ensure this points to the correct directory
+      dockerfile: Dockerfile  # Ensure this points to the correct Dockerfile
     container_name: my_blog
     volumes:
-      - ./:/var/www/
+      - ./front:/var/www/  # Mount ./front to /var/www in the container
     working_dir: /var/www/
     entrypoint: 'sh -c "npm install && npx vite --host 0.0.0.0"'
     expose:
-      - "5173"
+      - "5172"
     ports:
-      - "5173:5173"
+      - "5172:5172"

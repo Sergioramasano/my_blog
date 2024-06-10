@@ -16,7 +16,7 @@ RUN npm install
 COPY . .
 
 # Expose the port the app runs on
-EXPOSE 5173
+EXPOSE 5172
 
 # Command to run the application
 CMD ["sh", "-c", "npm install && npx vite --host 0.0.0.0"]
