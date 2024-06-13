@@ -8,6 +8,12 @@ To build and run the services, use the following commands:
 Build and start the Back-end Service:
 `docker-compose -f docker-compose.yml up --build -d`
 
+For Development:
+`docker-compose --env-file .env.development up --build`
+
+For Production:
+`docker-compose --env-file .env.production up --build`
+
 Build and start the Front-end Service:
 `docker-compose -f docker-compose.front.yml up --build -d`
 

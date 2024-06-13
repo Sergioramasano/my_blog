@@ -3,11 +3,14 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./backend   # Specify the directory containing the Dockerfile
-      dockerfile: Dockerfile  # Optional: Specify the Dockerfile name if it's not named 'Dockerfile'
+      context: ./backend  # Explicitly set the build context
+      dockerfile: Dockerfile
     container_name: my_backend
     ports:
-      - "9000:9000"  # Backend port
+      - "9000:9000"  # Map port 9000 on host to port 9000 in container
     volumes:
-      - .:/app
-    command: ["/app/bin/start.sh"]
+      - ./backend:/app  # Bind mount the backend directory to /app in the container
+      - /app/node_modules  # Prevent node_modules from being overwritten by the volume mount
+    command: ["sh", "-c", "npm install && npm run dev"]
+    environment:
+      - NODE_ENV=development
