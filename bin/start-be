@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Navigate to the root directory of the project
+cd "$(dirname "$0")/.."
+
+# Run docker-compose to start the backend container
+docker-compose -f docker-compose.yml up

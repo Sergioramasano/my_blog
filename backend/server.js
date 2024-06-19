@@ -4,6 +4,7 @@ const hbsexp = require('express-handlebars');
 const homeRoutes = require('./routes/home');
 const addRoutes = require('./routes/add');
 const coursesRoutes = require('./routes/courses');
+const cartRoutes = require('./routes/cart');
 
 const app = express();
 const port = process.env.PORT || 9000;
@@ -24,6 +25,7 @@ app.use(express.urlencoded({extended: true}));
 app.use('/', homeRoutes);
 app.use('/add',addRoutes);
 app.use('/courses', coursesRoutes);
+app.use('/cart', cartRoutes);
 
 app.listen(port, () => {
   console.log(`Server is listening on http://localhost:${port}`);

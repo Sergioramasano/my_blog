@@ -12,8 +12,13 @@
         <div class="card-content">
           <p class="price">{{price}}</p>
         </div>
-        <div class="card-action">
+        <div class="card-action actions">
           <a href="/courses/{{id}}" rel="noopener noreferrer" target="_blank">This is a link</a>
+          <a href="/courses/{{id}}/edit?allow=true" rel="noopener noreferrer" target="_blank">Edit</a>
+          <form action="/cart/add" method="POST">
+            <input type="hidden" name="id" value="{{id}}">
+            <button type="submit" class="waves-effect waves-light btn btn-primary">Buy</button>
+          </form>
         </div>
       </div>
     </div>

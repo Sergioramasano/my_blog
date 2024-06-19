@@ -6,7 +6,7 @@ There is a full-stack web application that allows users to create, read, update,
 To build and run the services, use the following commands:
 
 Build and start the Back-end Service:
-`docker-compose -f docker-compose.yml up --build -d`
+`bin/start-be`
 
 For Development:
 `docker-compose --env-file .env.development up --build`
