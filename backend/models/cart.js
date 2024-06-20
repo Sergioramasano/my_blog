@@ -1,16 +1,30 @@
+const path = require('path')
+const fs = require('fs')
+
+const p = path.join(path.dirname(require.main.filename), 'data', 'cart.json');
+
 class Cart {
 
 	static async add(course) {
-		const courses = await Cart.fetch()
-		const idx = courses.findIndex(c => c.id === course.id)
-		if (idx >= 0) {
-			courses[idx].count++
+		const cart = await Cart.fetch()
+
+		const idx = cart.courses.findIndex(c => c.id === course.id)
+		const candidate = cart.courses[idx]
+		
+		if (candidate) {
+			candidate.count++
+			cart.courses[idx] = candidate
 		} else {
-			courses.push(new CartItem(course.id, 1))
-		}				
+			course.count = 1
+			cart.courses.push(course)
+		}		
+
+		cart.price += +course.price
+
 		return new Promise((resolve, reject) => {
-			fs.writeFile(path.join(__dirname, '..', 'data', 'cart.json'), JSON.stringify(courses), err => {
+			fs.writeFile(p, JSON.stringify(cart), err => {
 				if (err) {
+					console.log('Error in adding to cart:', err);
 					reject(err)
 				} else {
 					resolve()
@@ -21,7 +35,7 @@ class Cart {
 
 	static async fetch() {
 		return new Promise((resolve, reject) => {
-			fs.readFile(path.join(__dirname, '..', 'data', 'cart.json'), 'utf-8', (err, content) => {
+			fs.readFile(p, 'utf-8', (err, content) => {
 				if (err) {
 					reject(err)
 				} else {
@@ -31,3 +45,5 @@ class Cart {
 		})
 	}
 }
+
+module.exports = Cart

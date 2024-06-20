@@ -1,1 +1,31 @@
-<h1>Cart</h1>
+<h1>{{title}}</h1>
+
+{{#if courses.length}}
+	{{#each courses}}
+	<div class="row">
+	<div class="col s6 offset-s3">
+		<div class="card">
+		<div class="card-image">
+			<img src="{{img}}" alt="{{title}}">
+			<span class="card-title black-text">{{title}}</span>
+		</div>
+		<div class="card-content">
+			<p class="price">{{price}}</p>
+		</div>
+		<div class="card-action actions">
+			<a href="/courses/{{id}}" rel="noopener noreferrer" target="_blank">This is a link</a>
+			<a href="/cart/edit/{{id}}" rel="noopener noreferrer" target="_blank">Edit</a>
+			<form action="/cart/delete" method="POST">	
+				<input type="hidden" name="id" value="{{id}}">
+				<button type="submit" class="waves-effect waves-light btn btn-primary">Delete</button>
+			</form>
+		</div>
+		</div>
+	</div>
+	</div>
+	{{/each}}
+{{else}}
+	<p>No courses</p>
+{{/if}}
+
+<p class="price big">{{price}}</p>

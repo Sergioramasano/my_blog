@@ -4,17 +4,29 @@ const Cart = require('../models/cart')
 const router = Router()
 
 router.post('/add', async (req, res) => {
-	const course = await Course.getById(req.body.id)
-	await Cart.add(course)
-	res.redirect('/cart')
-})
+    try {
+				const course = await Course.getById(req.body.id);
+				await Cart.add(course);
+				res.redirect('/cart');
+    } catch (error) {
+				console.error(error);
+				res.status(500).send('Server error');
+    }
+});
 
 router.get('/', async (req, res) => {
-	const cart = await Cart.fetch()
+    try {
+        const cart = await Cart.fetch();
+        res.render('cart', {
+            title: 'Cart',
+            courses: cart.courses,
+            price: cart.price,
+            isCart: true
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
 
-	res.render('cart', {
-		title: 'Cart',
-		cart
-	})
-})
 module.exports = router
