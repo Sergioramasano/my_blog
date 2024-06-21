@@ -1,1 +1,4 @@
-{"courses":[{"title":"SE","price":"1100","img":"https://austingil.com/wp-content/uploads/Vue-Blog-Cover.png","id":"69b6a557-4c3f-4ad1-8783-40eed3d8c2cc","count":2},{"title":"Angular","price":"140","img":"https://repository-images.githubusercontent.com/314186076/79a18fff-1aeb-4a12-9340-db81b383b5e7","id":"0c3c87f6-a896-4b41-bf3b-fee33bd5d9d6","count":7},{"title":"Vue js Edited","price":"1900","img":"https://austingil.com/wp-content/uploads/Vue-Blog-Cover.png","id":"df16b358-cb49-47ae-ba7c-4b9ec1dfd871","count":4}],"price":10780}
+{
+	"courses": [],
+	"price": 0
+}

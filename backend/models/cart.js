@@ -8,8 +8,8 @@ class Cart {
 	static async add(course) {
 		const cart = await Cart.fetch()
 
-		const idx = cart.courses.findIndex(c => c.id === course.id)
-		const candidate = cart.courses[idx]
+		const idx = cart?.courses?.length ? cart?.courses?.findIndex(c => c.id === course.id) : false
+		const candidate = idx ? cart.courses[idx] : false
 		
 		if (candidate) {
 			candidate.count++
@@ -39,7 +39,26 @@ class Cart {
 				if (err) {
 					reject(err)
 				} else {
-					resolve(JSON.parse(content))
+					const data = content ? JSON.parse(content) : {};
+					resolve(data);
+				}
+			})
+		})
+	}
+
+	static async remove(id) {
+		const cart = await Cart.fetch()
+		const idx = cart.courses?.findIndex(c => c.id === id)
+		const course = cart.courses[idx]
+		cart.courses = cart.courses.filter(c => c.id !== id)
+		cart.price -= course.price * course.count
+		return new Promise((resolve, reject) => {
+			fs.writeFile(p, JSON.stringify(cart), err => {
+				if (err) {
+					console.log('Error in removing from cart:', err);
+					reject(err)
+				} else {
+					resolve(cart)
 				}
 			})
 		})

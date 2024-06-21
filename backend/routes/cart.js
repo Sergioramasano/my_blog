@@ -29,4 +29,14 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.delete('/remove/:id', async (req, res) => {
+    try {
+        await Cart.remove(req.params.id)
+        res.redirect('/cart')
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Server error')
+    }
+})
+
 module.exports = router

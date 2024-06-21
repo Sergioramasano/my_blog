@@ -1,5 +1,6 @@
 <h1>{{title}}</h1>
 
+<div id="cart">
 {{#if courses.length}}
 	{{#each courses}}
 	<div class="row">
@@ -17,7 +18,7 @@
 			<a href="/cart/edit/{{id}}" rel="noopener noreferrer" target="_blank">Edit</a>
 			<form action="/cart/delete" method="POST">	
 				<input type="hidden" name="id" value="{{id}}">
-				<button type="submit" class="waves-effect waves-light btn btn-primary">Delete</button>
+				<button type="submit" class="waves-effect waves-light btn btn-primary js-remove" data-id="{{id}}">Delete</button>
 			</form>
 		</div>
 		</div>
@@ -27,5 +28,6 @@
 {{else}}
 	<p>No courses</p>
 {{/if}}
+</div>
 
 <p class="price big">{{price}}</p>
