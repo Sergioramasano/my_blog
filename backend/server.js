@@ -1,6 +1,10 @@
 const express = require('express');
 const path = require('path');
 const hbsexp = require('express-handlebars');
+require('dotenv').config();
+
+const mongoose = require('mongoose');
+const uri = process.env.MONGO_URI;
 
 const homeRoutes = require('./routes/home');
 const addRoutes = require('./routes/add');
@@ -28,6 +32,16 @@ app.use('/add',addRoutes);
 app.use('/courses', coursesRoutes);
 app.use('/cart', cartRoutes);
 
-app.listen(port, () => {
-  console.log(`Server is listening on http://localhost:${port}`);
-});
+//database
+async function start() {
+  try {
+    await mongoose.connect(uri);
+    app.listen(port, () => {
+      console.log(`Server is listening on http://localhost:${port}`);
+    });
+  } catch (e) {
+    console.log('db error:', e);
+  }
+}
+
+start()
